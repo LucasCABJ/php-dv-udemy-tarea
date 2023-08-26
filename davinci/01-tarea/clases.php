@@ -91,10 +91,51 @@ class Vendedor {
         $this->barrios = $barrios;
     }
 
+    public function getBarrios() {
+        return $this->barrios;
+    }
     public function getId() { return $this->id; }
     public function getNombre() { return $this->nombre; }
     public function isTieneBarrio($barrio) {
         return in_array($barrio, $this->barrios);
+    }
+
+}
+
+class VendedorBuscador {
+
+    public static function getByCodigo($vendedores, $id) {
+
+        foreach($vendedores as $vendedor) {
+
+            if($vendedor->getId() == $id) {
+                return $vendedor;
+            }
+
+        }
+
+        return null;
+
+    }
+
+    public static function countByBarrio($vendedores, $barrio) {
+
+        $contador = 0;
+
+        foreach($vendedores as $vendedor) {
+
+            foreach($vendedor->getBarrios() as $b) {
+                
+                if ($b == $barrio) {
+                    $contador++;
+                }
+
+            }
+
+        }
+
+        return $contador;
+
     }
 
 }
