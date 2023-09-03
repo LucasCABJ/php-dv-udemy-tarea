@@ -1,0 +1,1 @@
+<h2><?=$usuario->getNombre().' '.$usuario->getApellidos();?></h2>

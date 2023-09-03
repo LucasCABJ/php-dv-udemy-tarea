@@ -50,7 +50,7 @@ echo '<h2>Ejercicio 5:</h2>';
 $lista_vendedores = [
     new Vendedor(1, 'Gonzalo', array('Villa Crespo', 'Caballito', 'Almagro')),
     new Vendedor(2, 'Ezequiel', array('Villa Crespo', 'Almagro', 'Palermo')),
-    new Vendedor(3, 'Valeria', array('San Telmo', 'Boca', 'San Telmo')),
+    new Vendedor(3, 'Valeria', array('San Telmo', 'Boca', 'Almagro')),
     new Vendedor(4, 'Gastón', array('Liniers', 'Flores', 'Villa Lugano')),
     new Vendedor(5, 'Ornella', array('Colegiales', 'Chacarita', 'Paternal'))
 ];
