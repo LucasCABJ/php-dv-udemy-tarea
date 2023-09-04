@@ -16,11 +16,13 @@
             <a class="navbar-brand" href="#">Luvo</a>
             <div class='d-flex'>
                 <div class="login-register d-lg-none">
-                    <button class="btn btn-success" type="submit">Iniciar Sesion</button>
-                    <button class="btn btn-secondary me-2" type="submit">Registrarse</button>
+                    <a href="#" class="btn btn-success" type="submit">Iniciar Sesion</a>
+                    <a href="#" class="btn btn-secondary me-2" type="submit">Registrarse</a>
                 </div>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
@@ -30,7 +32,8 @@
                         <a class="nav-link active" aria-current="page" href="#">Inicio</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             Categorias
                         </a>
                         <ul class="dropdown-menu">
@@ -51,8 +54,9 @@
                     <button class="btn btn-outline-success" type="submit">Buscar</button>
                 </form>
                 <div class="login-register">
-                    <button class="btn btn-success me-lg-1 mb-2 mb-lg-0 d-none d-lg-inline-block" type="submit">Iniciar Sesion</button>
-                    <button class="btn btn-secondary d-none d-lg-inline-block" type="submit">Registrarse</button>
+                    <a href="#" class="btn btn-success me-lg-1 mb-2 mb-lg-0 d-none d-lg-inline-block" type="submit">Iniciar
+                        Sesion</a>
+                    <a href="#" class="btn btn-secondary d-none d-lg-inline-block" type="submit">Registrarse</a>
                 </div>
             </div>
         </div>
@@ -66,37 +70,48 @@
             </div>
         </header>
 
-        <div class="row" style='gap: 10px'>
-            <div class="card col-3">
-                <img src="./assets/img/remera-01.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 p-3">
+                <div class="card">
+                    <img src="./assets/img/remera-01.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">La remera que uso tu vieja</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fuga illum officia neque! Inventore provident voluptatem doloremque facere pariatur nesciunt rem optio expedita ipsum sunt, amet, accusantium similique impedit quo illo.</p>
+                        <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                    </div>
                 </div>
             </div>
-            <div class="card col-3">
-                <img src="./assets/img/remera-01.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+            <div class="col-12 col-md-6 col-lg-4 p-3">
+                <div class="card">
+                    <img src="./assets/img/buzo-01.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
                 </div>
             </div>
-            <div class="card col-3">
-                <img src="./assets/img/remera-01.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+            <div class="col-12 col-md-6 col-lg-4 p-3">
+                <div class="card">
+                    <img src="./assets/img/buzo-02.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
                 </div>
             </div>
-            <div class="card col-3">
-                <img src="./assets/img/remera-01.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+            <div class="col-12 col-md-6 col-lg-4 p-3">
+                <div class="card">
+                    <img src="./assets/img/remera-01.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
                 </div>
             </div>
         </div>
