@@ -6,11 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luvo | Tienda Oficial</title>
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-    <script src='./assets/js/bootstrap.bundle.min.js'></script>
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/notifications.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-
+    <?php if (isset($_SESSION['register']) && $_SESSION['register'] == 'complete') : ?>
+        <script>
+            registerSucess();
+        </script>
+    <?php elseif (isset($_SESSION['register']) && $_SESSION['register'] == 'failed') : ?>
+        <script>
+            registerFailed();
+        </script>
+    <?php elseif (isset($_SESSION['login']) && $_SESSION['login'] == 'failed') : ?>
+        <script>
+            loginFailed();
+        </script>
+    <?php endif; ?>
+    <?php $_SESSION['register'] = null; ?>
+    <?php $_SESSION['login'] = null; ?>
     <!-- LOGIN MODAL -->
     <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
@@ -20,7 +36,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="pages/login.php" method="POST" class="mb-2">
+                    <form action="./?controller=Usuario&action=login" method="POST" class="mb-2">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
                             <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -45,22 +61,22 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="./?controller=usuario&action=register" method="POST">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Nombre</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input type="text" name="nombre" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Apellido</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input type="text" name="apellido" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1">
+                            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                         </div>
                         <button class="btn btn-secondary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Volver atras</button>
                         <button type="submit" class="btn btn-primary">Registrarme</button>
@@ -72,15 +88,26 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary mb-5" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="<?= base_url; ?>">
                 <h1>Luvo</h1>
             </a>
             <div class='d-flex'>
-                <div class="login-register d-lg-none">
-                    <button class="btn btn-secondary me-2" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Acceder</button>
-                    <!-- <a href="#" class="btn btn-success" type="submit">Iniciar Sesion</a>
-                    <a href="#" class="btn btn-secondary me-2" type="submit">Registrarse</a> -->
-                </div>
+                <?php if (isset($_SESSION['userfirstname'])) : ?>
+                    <div class="dropdown d-block d-lg-none me-2">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <?= $_SESSION['userfirstname']; ?>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Mi carrito</a></li>
+                            <li><a class="dropdown-item" href="#">Ajustes de cuenta</a></li>
+                            <li><a class="dropdown-item text-danger" href="./?controller=usuario&action=logout">Cerrar Sesion</a></li>
+                        </ul>
+                    </div>
+                <?php else : ?>
+                    <div class="login-register d-block d-lg-none">
+                        <button class="btn btn-secondary me-2" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Acceder</button>
+                    </div>
+                <?php endif; ?>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -112,10 +139,22 @@
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Buscar</button>
                 </form>
-                <div class="login-register">
-                    <button class="btn btn-secondary d-none d-lg-inline-block" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Acceder</button>
-                    <!-- <a href="#" class="btn btn-secondary d-none d-lg-inline-block" type="submit">Registrarse</a> -->
-                </div>
+                <?php if (isset($_SESSION['userfirstname'])) : ?>
+                    <div class="dropdown d-none d-lg-block">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <?= $_SESSION['userfirstname']; ?>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Mi carrito</a></li>
+                            <li><a class="dropdown-item" href="#">Ajustes de cuenta</a></li>
+                            <li><a class="dropdown-item text-danger" href="./?controller=usuario&action=logout">Cerrar Sesion</a></li>
+                        </ul>
+                    </div>
+                <?php else : ?>
+                    <div class="login-register d-none d-lg-block">
+                        <button class="btn btn-secondary me-2" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Acceder</button>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </nav>

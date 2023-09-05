@@ -1,14 +1,38 @@
 <?php
+session_start();
 require_once 'config/db.php';
+require_once 'config/parameters.php';
+require_once 'autoload.php';
 $db = Database::connect();
 ?>
-<?php require_once 'autoload.php'; ?>
+
+<?php
+
+if (isset($_GET['controller']) && class_exists($_GET['controller'] . 'Controller')) {
+
+    $nombre_controller = $_GET['controller'] . 'Controller';
+
+    var_dump($nombre_controller);
+
+    if (class_exists($nombre_controller)) {
+
+        $controlador = new $nombre_controller();
+        $action = isset($_GET['action']) ? $_GET['action'] : false;
+
+        if (isset($_GET['action']) && ($action == 'register' || $action == 'login' || $action == 'logout') && method_exists($controlador, $action)) {
+
+            $action = $_GET['action'];
+            $controlador->$action();
+        }
+    }
+}
+?>
 
 <?php require_once 'pages/header.php'; ?>
 
 <?php
 
-if (@isset($_GET['controller']) && @class_exists($_GET['controller'] . 'Controller')) {
+if (isset($_GET['controller']) && class_exists($_GET['controller'] . 'Controller')) {
 
     $nombre_controller = $_GET['controller'] . 'Controller';
 
@@ -21,19 +45,20 @@ if (@isset($_GET['controller']) && @class_exists($_GET['controller'] . 'Controll
         require_once 'views/Error/pagefailed.php';
     }
 } else {
-    require_once 'views/Error/pagefailed.php';
+    $controlador = new ProductoController();
+    $controlador->index();
 }
 
 ?>
 
 <!-- 
-<section class='mb-5 container'>
-
-    <div id="carouselExample" class="carousel slide">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="http://via.placeholder.com/1080x350
-" class="d-block w-100" alt="...">
+    <section class='mb-5 container'>
+        
+        <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="http://via.placeholder.com/1080x350
+                    " class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
                 <img src="http://via.placeholder.com/1080x350
@@ -41,7 +66,7 @@ if (@isset($_GET['controller']) && @class_exists($_GET['controller'] . 'Controll
             </div>
             <div class="carousel-item">
                 <img src="http://via.placeholder.com/1080x350
-" class="d-block w-100" alt="...">
+                " class="d-block w-100" alt="...">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -53,7 +78,6 @@ if (@isset($_GET['controller']) && @class_exists($_GET['controller'] . 'Controll
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-
+    
 </section> -->
-
 <?php require_once 'pages/footer.php'; ?>
