@@ -15,11 +15,11 @@ CREATE TABLE usuarios(
 
 INSERT INTO usuarios VALUES(NULL, 'admin', 'admin', 'admin@admin.com', '1234', 'admin', null);
 
-CREATE TABLE categorias {
+CREATE TABLE categorias(
     categoria_id INT AUTO_INCREMENT NOT NULL,
     nombre VARCHAR(255) NOT NULL,
     CONSTRAINT pk_categoria PRIMARY KEY (categoria_id)
-}ENGINE=InnoDB;
+)ENGINE=InnoDB;
 
 INSERT INTO categorias VALUES (NULL, 'Manga corta');
 INSERT INTO categorias VALUES (NULL, 'Manga larga');
@@ -37,21 +37,21 @@ CREATE TABLE productos(
     fecha               DATE NOT NULL,
     imagen              INT(255),
     CONSTRAINT pk_producto PRIMARY KEY (producto_id),
-    CONSTRAINT fk_producto_categoria FOREIGN KEY (categoria_id) REFERENCES categorias(categoria_id),
+    CONSTRAINT fk_producto_categoria FOREIGN KEY (categoria_id) REFERENCES categorias(categoria_id)
 )ENGINE=InnoDB;
 
 CREATE TABLE pedidos(
     pedido_id          INT AUTO_INCREMENT NOT NULL,
     usuario_id         INT NOT NULL,
-    provincia          VARCHAR NOT NULL,
-    localidad          VARCHAR NOT NULL,
-    direccion          VARCHAR NOT NULL,
+    provincia          VARCHAR(255) NOT NULL,
+    localidad          VARCHAR(255) NOT NULL,
+    direccion          VARCHAR(255) NOT NULL,
     coste              FLOAT NOT NULL,
-    estado             VARCHAR NOT NULL,
+    estado             VARCHAR(255) NOT NULL,
     fecha              DATE,
     hora               TIME,
     CONSTRAINT pk_pedido PRIMARY KEY (pedido_id),
-    CONSTRAINT fk_pedido_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(usuario_id),
+    CONSTRAINT fk_pedido_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(usuario_id)
 )ENGINE=InnoDB;
 
 CREATE TABLE lineas_pedidos(
