@@ -17,7 +17,7 @@ class UsuarioController
 
     public function logout()
     {
-        session_destroy();
+        session_unset();
         header('Location:./');
         die();
     }
@@ -26,44 +26,16 @@ class UsuarioController
     {
         if (isset($_POST)) {
 
-
-            $email = isset($_POST['email']) ? mysqli_real_escape_string($this->db, $_POST['email']) : false;
-            $password = isset($_POST['password']) ? trim($_POST['password']) : false;
+            $email = isset($_POST['email']) ? $_POST['email'] : false;
+            $password = isset($_POST['password']) ? password_hash($_POST['password'], PASSWORD_BCRYPT) : false;
 
             if (!empty($email) && !empty($password)) {
-
-                $usuario = new Usuario();
-
-                $usuario->setPassword($password);
-                $usuario->setEmail($email);
-
-                $search = $usuario->search();
-
-                if ($search != false) {
-
-                    $encrypted_password = password_verify($usuario->getPassword(), $search->password);
-
-                    if ($encrypted_password) {
-
-                        $usuario->setNombre($search->nombre);
-                        $usuario->setApellidos($search->apellidos);
-                        $usuario->setRol($search->rol);
-                        $usuario->setImagen($search->imagen);
-
-                        $_SESSION['userfirstname'] = $usuario->getNombre();
-                        $_SESSION['useremail'] = $usuario->getEmail();
-                    } else {
-                        $_SESSION['login'] = 'failed';
-                    }
-                }
             } else {
                 $_SESSION['login'] = 'failed';
             }
         } else {
             $_SESSION['login'] = 'failed';
         }
-        header('Location:./');
-        die();
     }
 
     public function register()
@@ -71,19 +43,14 @@ class UsuarioController
 
         if (isset($_POST)) {
 
-            $nombre = isset($_POST['nombre']) ? mysqli_real_escape_string($this->db, $_POST['nombre']) : false;
-            $apellido = isset($_POST['apellido']) ? mysqli_real_escape_string($this->db, $_POST['apellido']) : false;
-            $email = isset($_POST['email']) ? mysqli_real_escape_string($this->db, $_POST['email']) : false;
+            $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
+            $apellido = isset($_POST['apellido']) ? $_POST['apellido'] : false;
+            $email = isset($_POST['email']) ? $_POST['email'] : false;
             $password = isset($_POST['password']) ? password_hash($_POST['password'], PASSWORD_BCRYPT) : false;
 
             if (!empty($nombre) && !empty($apellido) && !empty($email) && !empty($password)) {
 
-                $usuario = new Usuario();
-
-                $usuario->setNombre($nombre);
-                $usuario->setApellidos($apellido);
-                $usuario->setPassword($password);
-                $usuario->setEmail($email);
+                $usuario = new Usuario($nombre, $apellido, $email, $password);
 
                 $save = $usuario->save();
 

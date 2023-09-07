@@ -2,187 +2,122 @@
 
 class Usuario
 {
+    private $data;
 
-    private $id;
-    private $nombre;
-    private $apellidos;
-    private $email;
-    private $password;
-    private $rol;
-    private $imagen;
-    private $db;
-
-    public function __construct()
+    public function __construct($nombre, $apellidos, $email, $password)
     {
-        $this->db = Database::connect();
+        $this->data = array(
+            "id" => null,
+            "nombre" => $nombre,
+            "apellidos" => $apellidos,
+            "email" => $email,
+            "password" => $password,
+            "rol" => null,
+            "imagen" => null
+        );
     }
 
     public function save()
     {
-        $sql = "INSERT INTO usuarios VALUES(NULL, '$this->nombre', '$this->apellidos', '$this->email', '$this->password',
-        'user',  NULL);";
-        $save = $this->db->query($sql);
-
-        if ($save) {
-            return true;
+        if ($this->id == null) {
+            return $this->insert();
         } else {
+            return $this->update();
+        }
+    }
+
+    function insert()
+    {
+        $db = Database::connect();
+        $stm = $db->prepare("
+            INSERT INTO usuarios VALUES(
+                NULL,
+                :nombre,
+                :apellidos,
+                :email,
+                :password,
+                'user',
+                NULL
+            );
+        ");
+        $stm->bindValue(':nombre', $this->nombre);
+        $stm->bindValue(':apellidos', $this->apellidos);
+        $stm->bindValue(':email', $this->email);
+        $stm->bindValue(':password', $this->password);
+
+        try {
+            $success = $stm->execute();
+
+            if ($success) {
+                $this->id = $db->lastInsertId();
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
             return false;
         }
     }
 
-    public function search()
+    function update()
     {
-        $sql = "SELECT * FROM usuarios WHERE email = '$this->email';";
-        $save = $this->db->query($sql);
-        if ($save != false and $save->num_rows == 1) {
-            return mysqli_fetch_object($save);
-        } else {
+        $db = Database::connect();
+        $stm = $db->prepare("
+            UPDATE usuarios SET
+                nombre = :nombre,
+                apellidos = :apellidos,
+                email = :email,
+                password = :password,
+                rol = 'user'
+            );
+        ");
+        $stm->bindValue(':nombre', $this->nombre);
+        $stm->bindValue(':apellidos', $this->apellidos);
+        $stm->bindValue(':email', $this->email);
+        $stm->bindValue(':password', $this->password);
+
+        try {
+            $success = $stm->execute();
+
+            if ($success) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
             return false;
         }
     }
 
-
-    /**
-     * @return mixed
-     */
-    public function getId()
+    function __get($name)
     {
-        return $this->id;
+        return $this->data[$name];
     }
 
-    /**
-     * @param mixed $id 
-     * @return self
-     */
-    public function setId($id): self
+    function __set($name, $value)
     {
-        $this->id = $id;
-        return $this;
+        return $this->data[$name] = $value;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getNombre()
+    static function searchByEmail($email)
     {
-        return $this->nombre;
-    }
+        $db = Database::connect();
+        $stm = $db->prepare("
+            SELECT * FROM usuarios
+            WHERE email = :email;
+        ");
+        $stm->bindValue(':email', $email);
 
-    /**
-     * @param mixed $nombre 
-     * @return self
-     */
-    public function setNombre($nombre): self
-    {
-        $this->nombre = $nombre;
-        return $this;
-    }
+        try {
+            $success = $stm->execute();
 
-    /**
-     * @return mixed
-     */
-    public function getApellidos()
-    {
-        return $this->apellidos;
-    }
-
-    /**
-     * @param mixed $apellidos 
-     * @return self
-     */
-    public function setApellidos($apellidos): self
-    {
-        $this->apellidos = $apellidos;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param mixed $email 
-     * @return self
-     */
-    public function setEmail($email): self
-    {
-        $this->email = $email;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @param mixed $password 
-     * @return self
-     */
-    public function setPassword($password): self
-    {
-        $this->password = $password;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRol()
-    {
-        return $this->rol;
-    }
-
-    /**
-     * @param mixed $rol 
-     * @return self
-     */
-    public function setRol($rol): self
-    {
-        $this->rol = $rol;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getImagen()
-    {
-        return $this->imagen;
-    }
-
-    /**
-     * @param mixed $imagen 
-     * @return self
-     */
-    public function setImagen($imagen): self
-    {
-        $this->imagen = $imagen;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDb()
-    {
-        return $this->db;
-    }
-
-    /**
-     * @param mixed $db 
-     * @return self
-     */
-    public function setDb($db): self
-    {
-        $this->db = $db;
-        return $this;
+            if ($stm->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 }
