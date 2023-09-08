@@ -44,9 +44,11 @@ class UsuarioController
 
                 $success = $updated_user->save();
 
+                // SESSION DATA
                 if ($success) {
                     $_SESSION['user_update'] = 'success';
                     $_SESSION['userfirstname'] = $updated_user->nombre;
+                    $_SESSION['usuario_role'] = $updated_user->rol;
                 } else {
                     $_SESSION['user_update'] = 'failed';
                 }
@@ -75,8 +77,10 @@ class UsuarioController
             if (!empty($email) && !empty($password)) {
                 $user = Usuario::verifyUser($email, $password);
                 if ($user) {
+                    // USER SESSION DATA
                     $_SESSION['userfirstname'] = $user->nombre;
                     $_SESSION['usuario_id'] = $user->usuario_id;
+                    $_SESSION['usuario_role'] = $user->rol;
                 } else {
                     $_SESSION['login'] = 'failed';
                 }

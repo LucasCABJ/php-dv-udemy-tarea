@@ -26,21 +26,6 @@ class Usuario
         }
     }
 
-    public function modify()
-    {
-
-        // $user = new Usuario(
-        //     $database_user->nombre,
-        //     $database_user->apellidos,
-        //     $database_user->email,
-        //     $database_user->password
-        // );
-
-        // $user->id = $database_user->usuario_id;
-        // $user->rol = $database_user->rol;
-        // $user->imagen = $database_user->imagen;
-    }
-
     function insert()
     {
         $db = Database::connect();

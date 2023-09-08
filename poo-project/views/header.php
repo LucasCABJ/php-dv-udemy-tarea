@@ -87,9 +87,9 @@
                             <label for="exampleInputPassword1" class="form-label">Contraseña</label>
                             <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                         </div>
-                        <button class="btn btn-secondary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Volver atras</button>
-                        <button type="submit" class="btn btn-primary">Registrarme</button>
+                        <button type="submit" class="btn btn-primary mb-2">Registrarme</button>
                     </form>
+                    <button class="btn btn-secondary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Volver atras</button>
                 </div>
             </div>
         </div>
@@ -108,6 +108,9 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="#">Mi carrito</a></li>
+                            <?php if (isset($_SESSION['usuario_role']) && $_SESSION['usuario_role'] == 'admin') : ?>
+                                <li><a class="dropdown-item" href="./index.php?controller=producto&action=administrar">Administrar Productos</a></li>
+                            <?php endif; ?>
                             <li><a class="dropdown-item" href="#">Ajustes de cuenta</a></li>
                             <li><a class="dropdown-item text-danger" href="./?controller=usuario&action=logout">Cerrar Sesion</a></li>
                         </ul>
@@ -156,6 +159,9 @@
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="#">Mi carrito</a></li>
                             <li><a class="dropdown-item" href="./?controller=usuario&action=ajustes">Ajustes de cuenta</a></li>
+                            <?php if (isset($_SESSION['usuario_role']) && $_SESSION['usuario_role'] == 'admin') : ?>
+                                <li><a class="dropdown-item" href="./index.php?controller=producto&action=administrar">Administrar Productos</a></li>
+                            <?php endif; ?>
                             <li><a class="dropdown-item text-danger" href="./?controller=usuario&action=logout">Cerrar Sesion</a></li>
                         </ul>
                     </div>
