@@ -24,9 +24,18 @@
         <script>
             loginFailed();
         </script>
+    <?php elseif (isset($_SESSION['user_update']) && $_SESSION['user_update'] == 'success') : ?>
+        <script>
+            userUpdateSuccess();
+        </script>
+    <?php elseif (isset($_SESSION['user_update']) && $_SESSION['user_update'] == 'failed') : ?>
+        <script>
+            userUpdateFailed();
+        </script>
     <?php endif; ?>
-    <?php $_SESSION['register'] = null; ?>
-    <?php $_SESSION['login'] = null; ?>
+    <?php unset($_SESSION['register']); ?>
+    <?php unset($_SESSION['login']); ?>
+    <?php unset($_SESSION['user_update']); ?>
     <!-- LOGIN MODAL -->
     <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
@@ -146,7 +155,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="#">Mi carrito</a></li>
-                            <li><a class="dropdown-item" href="#">Ajustes de cuenta</a></li>
+                            <li><a class="dropdown-item" href="./?controller=usuario&action=ajustes">Ajustes de cuenta</a></li>
                             <li><a class="dropdown-item text-danger" href="./?controller=usuario&action=logout">Cerrar Sesion</a></li>
                         </ul>
                     </div>

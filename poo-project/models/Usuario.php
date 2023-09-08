@@ -26,6 +26,21 @@ class Usuario
         }
     }
 
+    public function modify()
+    {
+
+        // $user = new Usuario(
+        //     $database_user->nombre,
+        //     $database_user->apellidos,
+        //     $database_user->email,
+        //     $database_user->password
+        // );
+
+        // $user->id = $database_user->usuario_id;
+        // $user->rol = $database_user->rol;
+        // $user->imagen = $database_user->imagen;
+    }
+
     function insert()
     {
         $db = Database::connect();
@@ -67,14 +82,14 @@ class Usuario
                 nombre = :nombre,
                 apellidos = :apellidos,
                 email = :email,
-                password = :password,
-                rol = 'user'
-            );
+                password = :password
+            WHERE usuario_id = :id;
         ");
         $stm->bindValue(':nombre', $this->nombre);
         $stm->bindValue(':apellidos', $this->apellidos);
         $stm->bindValue(':email', $this->email);
         $stm->bindValue(':password', $this->password);
+        $stm->bindValue(':id', $this->id);
 
         try {
             $success = $stm->execute();
@@ -109,10 +124,63 @@ class Usuario
         $stm->bindValue(':email', $email);
 
         try {
-            $success = $stm->execute();
+            $stm->execute();
 
             if ($stm->rowCount() > 0) {
                 return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    static function verifyUser($email, $password)
+    {
+        $db = Database::connect();
+        $stm = $db->prepare("
+            SELECT * FROM usuarios
+            WHERE email = :email;
+        ");
+        $stm->bindValue(':email', $email);
+
+        try {
+            $stm->execute();
+
+            if ($stm->rowCount() > 0) {
+
+                $record = $stm->fetchObject();
+                $valid_password = password_verify($password, $record->password);
+
+                if ($valid_password) {
+                    return $record;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    static function getUserById($id)
+    {
+        $db = Database::connect();
+        $stm = $db->prepare("
+            SELECT * FROM usuarios
+            WHERE usuario_id = :id;
+        ");
+        $stm->bindValue(':id', $id);
+
+        try {
+            $stm->execute();
+
+            if ($stm->rowCount() > 0) {
+
+                return $stm->fetchObject();
             } else {
                 return false;
             }
