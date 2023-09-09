@@ -1,3 +1,4 @@
+<?php require_once 'views/header.php' ?>
 <section class='container mb-5'>
 
     <header class="row mb-3">
@@ -54,3 +55,4 @@
     </div>
 
 </section>
+<?php require_once 'views/footer.php' ?>
