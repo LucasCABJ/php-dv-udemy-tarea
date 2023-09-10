@@ -1,0 +1,15 @@
+$primary: #2A1B3D;
+$secondary: #D83787;
+
+@import '../bootstrap-scss/functions';
+@import '../bootstrap-scss/variables';
+
+$custom-theme-colors: (
+    "footer": #656565,
+    "theme-grey": #86668b,
+);
+
+$theme-colors: map-merge($custom-theme-colors, $theme-colors);
+
+@import '../bootstrap-scss/bootstrap.scss';
+

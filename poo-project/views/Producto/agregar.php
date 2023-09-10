@@ -11,13 +11,19 @@
 
         <form action="./index.php?controller=producto&action=agregar" method="POST" class="mb-2">
             <div class="mb-3">
+                <label for="nombre" class="form-label">Imagen del producto</label>
+                <input type="file" name="imagen" class="form-control" id="imagen" aria-describedby="emailHelp" required>
+            </div>
+
+            <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" name="nombre" class="form-control" id="nombre" aria-describedby="emailHelp" required>
             </div>
 
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripcion</label>
-                <textarea class="form-control" id="descripcion" rows="3" name="descripcion" style="resize: none;" required></textarea>
+                <textarea class="form-control" id="descripcion" rows="3" name="descripcion" style="resize: none;"
+                    required></textarea>
             </div>
 
             <div class="mb-3">
@@ -40,7 +46,7 @@
                 <input type="number" name="stock" class="form-control" id="stock" aria-describedby="emailHelp" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Agregar Producto</button>
+            <button type="submit" class="btn btn-secondary text-white">Agregar Producto</button>
         </form>
 
 

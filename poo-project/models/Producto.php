@@ -50,7 +50,8 @@ class Producto
                 :descripcion,
                 :precio,
                 :stock,
-                null,
+                NULL,
+                CURDATE(),
                 NULL
             );
         ");
@@ -102,5 +103,15 @@ class Producto
         } catch (PDOException $e) {
             return false;
         }
+    }
+
+    static function getAll() {
+        $db = Database::connect();
+        $stm = $db->prepare("
+            SELECT * FROM productos
+        ");
+        $stm->execute();
+
+        return $stm;
     }
 }

@@ -9,7 +9,7 @@
 
     <article>
 
-        <a href="./index.php?controller=producto&action=agregar" class='btn btn-primary'>Agregar Producto</a>
+        <a href="./index.php?controller=producto&action=agregar" class='btn btn-secondary text-white'>Agregar Producto</a>
 
     </article>
 

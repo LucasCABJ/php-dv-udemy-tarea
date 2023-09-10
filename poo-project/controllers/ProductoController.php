@@ -6,6 +6,8 @@ class ProductoController
 
     public function index()
     {
+        $productos = Producto::getAll();
+
         require_once 'views/Producto/productosDestacados.php';
     }
 
@@ -37,8 +39,13 @@ class ProductoController
             if (!empty($nombre) && !empty($descripcion) && !empty($categoria) && !empty($precio) && !empty($stock)) {
 
                 $producto = new Producto($categoria, $nombre, $descripcion, $precio, $stock);
-                var_dump($producto);
-                $producto->save();
+                $success = $producto->save();
+
+                if($success) {
+                    $_SESSION['product_add'] = "success";
+                } else {
+                    $_SESSION['product_add'] = "failed";
+                }
             }
         }
 
