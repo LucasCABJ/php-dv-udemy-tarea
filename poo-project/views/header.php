@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luvo | Tienda Oficial</title>
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="./assets/fontawesome-free-6.4.2-web/css/all.min.css">
+    <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="./assets/css/custom.css">
     <link rel="stylesheet" href="./assets/css/extra.css">
     <script src="./assets/js/bootstrap.bundle.min.js"></script>
@@ -49,10 +52,10 @@
     <?php unset($_SESSION['user_update']); ?>
     <?php unset($_SESSION['product_add']); ?>
     <!-- LOGIN MODAL -->
-    <div class="modal fade text-white" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-        tabindex="-1" data-bs-theme="dark">
+    <div class="modal fade text-white" id="exampleModalToggle" aria-hidden="true"
+        aria-labelledby="exampleModalToggleLabel" tabindex="-1" data-bs-theme="dark">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+            <div class="modal-content bg-primary">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Iniciar Sesion</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -69,18 +72,19 @@
                             <input type="password" name='password' class="form-control rounded-0" id="loginPassword">
                         </div>
                         <button type="submit" class="btn btn-secondary text-white rounded-0">Acceder</button>
-                        <button class="btn btn-theme-grey btn-hover-white rounded-0" data-bs-target="#exampleModalToggle2"
-                        data-bs-toggle="modal" type="button">No tienes cuenta? Registrate</button>
+                        <button class="btn btn-theme-grey btn-hover-white rounded-0"
+                            data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" type="button">No tienes cuenta?
+                            Registrate</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
     <!-- REGISTER MODAL -->
-    <div class="modal fade text-white" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-        tabindex="-1" data-bs-theme="dark">
+    <div class="modal fade text-white" id="exampleModalToggle2" aria-hidden="true"
+        aria-labelledby="exampleModalToggleLabel2" tabindex="-1" data-bs-theme="dark">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+            <div class="modal-content bg-primary">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Registrarse</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -104,10 +108,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label rounded-0">Contraseña</label>
-                            <input type="password" name="password" class="form-control rounded-0" id="exampleInputPassword1">
+                            <input type="password" name="password" class="form-control rounded-0"
+                                id="exampleInputPassword1">
                         </div>
                         <button type="submit" class="btn btn-secondary text-white rounded-0">Registrarme</button>
-                        <button type="button" class="btn btn-theme-grey btn-hover-white rounded-0" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Volver
+                        <button type="button" class="btn btn-theme-grey btn-hover-white rounded-0"
+                            data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Volver
                             atras</button>
                     </form>
                 </div>
@@ -116,16 +122,16 @@
     </div>
 
     <nav class="navbar navbar-expand-lg bg-primary mb-5" data-bs-theme="dark">
-        <div class="container-fluid">
+        <div class="container-fluid mx-lg-5">
             <a class="navbar-brand" href="<?= base_url; ?>">
                 <h1>Luvo</h1>
             </a>
             <div class='d-flex'>
                 <?php if (isset($_SESSION['userfirstname'])): ?>
                     <div class="dropdown d-block d-lg-none me-2">
-                        <button class="btn rounded-0 btn-secondary text-white dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <?= $_SESSION['userfirstname']; ?>
+                        <button class="btn rounded-0 btn-secondary text-white dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-user me-2"></i><?= $_SESSION['userfirstname']; ?>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="#">Mi carrito</a></li>
@@ -140,8 +146,8 @@
                     </div>
                 <?php else: ?>
                     <div class="login-register d-block d-lg-none">
-                        <button class="btn btn-secondary text-white me-2" data-bs-target="#exampleModalToggle"
-                            data-bs-toggle="modal">Acceder</button>
+                        <button class="btn btn-secondary rounded-0 text-white me-2" data-bs-target="#exampleModalToggle"
+                            data-bs-toggle="modal"><i class="fa-solid fa-right-to-bracket me-2"></i>Acceder</button>
                     </div>
                 <?php endif; ?>
 
@@ -154,20 +160,18 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                        <a class="nav-link active" aria-current="page" href="#"><i class="fa-solid fa-home me-2"></i>Inicio</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            Categorias
+                            <i class="fa-solid fa-book me-2"></i>Categorias
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Remeras</a></li>
-                            <li><a class="dropdown-item" href="#">Buzos</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Jeans</a></li>
+                            <?php $categorias = CategoriaController::getAll() ?>
+                            <?php while ($categoria = $categorias->fetchObject()): ?>
+                                <li><a class="dropdown-item" href="#"><?= $categoria->nombre ?></a></li>
+                            <?php endwhile; ?>
                         </ul>
                     </li>
                     <!-- <li class="nav-item">
@@ -175,14 +179,15 @@
                     </li> -->
                 </ul>
                 <form class="d-flex mb-3 mb-lg-0 me-lg-2" role="search">
-                    <input class="form-control me-2 rounded-0" type="search" placeholder="Search" aria-label="Search" id="searchBtn">
-                    <button class="btn btn-theme-grey btn-hover-white rounded-0" type="submit">Buscar</button>
+                    <input class="form-control rounded-0" type="search" placeholder="Buscar..." aria-label="Search"
+                        id="searchBtn">
+                    <button class="btn btn-theme-grey btn-hover-white rounded-0" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
                 <?php if (isset($_SESSION['userfirstname'])): ?>
                     <div class="dropdown d-none d-lg-block">
-                        <button class="btn btn-secondary rounded-0 text-white dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <?= $_SESSION['userfirstname']; ?>
+                        <button class="btn btn-secondary rounded-0 text-white dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-user me-2"></i><?= $_SESSION['userfirstname']; ?>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="#">Mi carrito</a></li>
@@ -199,7 +204,7 @@
                 <?php else: ?>
                     <div class="login-register d-none d-lg-block">
                         <button class="btn btn-secondary text-white me-2 rounded-0" data-bs-target="#exampleModalToggle"
-                            data-bs-toggle="modal">Acceder</button>
+                            data-bs-toggle="modal"><i class="fa-solid fa-right-to-bracket me-2"></i>Acceder</button>
                     </div>
                 <?php endif; ?>
             </div>

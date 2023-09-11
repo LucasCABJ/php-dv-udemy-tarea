@@ -5,7 +5,7 @@ class Producto
 
     private $data;
 
-    function __construct($categoria_id, $nombre, $descripcion, $precio, $stock)
+    function __construct($categoria_id, $nombre, $descripcion, $precio, $stock, $imagen)
     {
         $this->data = array(
             "producto_id" => null,
@@ -16,7 +16,7 @@ class Producto
             "stock" => $stock,
             "ofertas" => null,
             "fecha" => null,
-            "imagen" => null
+            "imagen" => $imagen
         );
     }
 
@@ -52,7 +52,7 @@ class Producto
                 :stock,
                 NULL,
                 CURDATE(),
-                NULL
+                :imagen
             );
         ");
 
@@ -61,6 +61,7 @@ class Producto
         $stm->bindValue(':descripcion', $this->descripcion);
         $stm->bindValue(':precio', $this->precio);
         $stm->bindValue(':stock', $this->stock);
+        $stm->bindValue(':imagen', $this->imagen);
 
         try {
             $success = $stm->execute();
@@ -108,7 +109,7 @@ class Producto
     static function getAll() {
         $db = Database::connect();
         $stm = $db->prepare("
-            SELECT * FROM productos
+            SELECT * FROM productos ORDER BY precio DESC;
         ");
         $stm->execute();
 
