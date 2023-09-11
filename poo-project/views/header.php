@@ -133,7 +133,7 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa-solid fa-user me-2"></i><?= $_SESSION['userfirstname']; ?>
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-end">
+                        <ul class="dropdown-menu rounded-0 bg-primary dropdown-menu-end">
                             <li><a class="dropdown-item" href="#">Mi carrito</a></li>
                             <?php if (isset($_SESSION['usuario_role']) && $_SESSION['usuario_role'] == 'admin'): ?>
                                 <li><a class="dropdown-item"
@@ -167,7 +167,7 @@
                             aria-expanded="false">
                             <i class="fa-solid fa-book me-2"></i>Categorias
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu rounded-0 bg-primary">
                             <?php $categorias = CategoriaController::getAll() ?>
                             <?php while ($categoria = $categorias->fetchObject()): ?>
                                 <li><a class="dropdown-item" href="#"><?= $categoria->nombre ?></a></li>
@@ -189,7 +189,7 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa-solid fa-user me-2"></i><?= $_SESSION['userfirstname']; ?>
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-end">
+                        <ul class="dropdown-menu rounded-0 bg-primary dropdown-menu-end">
                             <li><a class="dropdown-item" href="#">Mi carrito</a></li>
                             <li><a class="dropdown-item" href="./?controller=usuario&action=ajustes">Ajustes de cuenta</a>
                             </li>
